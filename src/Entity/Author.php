@@ -8,21 +8,26 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+/** An author. */
 #[ORM\Entity(repositoryClass: AuthorRepository::class)]
 #[ApiResource]
 class Author
 {
+    /** The ID of this author. */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    /** The first name of this author. */
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
 
+    /** The last name of this author. */
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
+    /** @var Book[] Books this author wrote. */
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class)]
     private Collection $books;
 

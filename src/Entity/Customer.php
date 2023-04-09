@@ -8,21 +8,26 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+/** A customer. */
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
 #[ApiResource]
 class Customer
 {
+    /** The ID of this customer. */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    /** The first name of this customer. */
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
 
+    /** The last name of this customer. */
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
+    /** @var Purchase[] Purchases this customer made. */
     #[ORM\OneToMany(mappedBy: 'customer', targetEntity: Purchase::class)]
     private Collection $purchases;
 

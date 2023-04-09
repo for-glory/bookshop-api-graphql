@@ -7,21 +7,26 @@ use App\Repository\PurchaseRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+/** A purchase. */
 #[ORM\Entity(repositoryClass: PurchaseRepository::class)]
 #[ApiResource]
 class Purchase
 {
+    /** The ID of this purchase. */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    /** The date time at which this purchase was made. */
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE)]
     private ?\DateTimeImmutable $purchaseDate = null;
 
+    /** The customer who made this purchase. */
     #[ORM\ManyToOne(inversedBy: 'purchases')]
     private ?Customer $customer = null;
 
+    /** The book that was purchased. */
     #[ORM\ManyToOne]
     private ?Book $book = null;
 

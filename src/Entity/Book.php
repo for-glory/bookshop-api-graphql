@@ -9,27 +9,34 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+/** A book. */
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 #[ApiResource]
 class Book
 {
+    /** The ID of this book. */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    /** The ISBN of this book (or null if doesn't have one). */
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $isbn = null;
 
+    /** The title of this book. */
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    /** The summary of this book. */
     #[ORM\Column(type: Types::TEXT)]
     private ?string $summary = null;
 
+    /** The price of this book. */
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $price = null;
 
+    /** The author of this book. */
     #[ORM\ManyToOne(inversedBy: 'books')]
     private ?Author $author = null;
 
