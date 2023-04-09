@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /** A book. */
 #[ORM\Entity(repositoryClass: BookRepository::class)]
@@ -22,10 +23,12 @@ class Book
 
     /** The ISBN of this book (or null if doesn't have one). */
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Isbn]
     private ?string $isbn = null;
 
     /** The title of this book. */
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $title = null;
 
     /** The summary of this book. */
@@ -34,11 +37,13 @@ class Book
 
     /** The price of this book. */
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[Assert\PositiveOrZero]
     private ?string $price = null;
 
     /** The author of this book. */
     #[ORM\ManyToOne(inversedBy: 'books')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull]
     private ?Author $author = null;
 
     public function getId(): ?int
