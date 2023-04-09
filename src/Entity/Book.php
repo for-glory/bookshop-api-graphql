@@ -38,6 +38,7 @@ class Book
 
     /** The author of this book. */
     #[ORM\ManyToOne(inversedBy: 'books')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Author $author = null;
 
     public function getId(): ?int

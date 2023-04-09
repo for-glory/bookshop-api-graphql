@@ -24,10 +24,12 @@ class Purchase
 
     /** The customer who made this purchase. */
     #[ORM\ManyToOne(inversedBy: 'purchases')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Customer $customer = null;
 
     /** The book that was purchased. */
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Book $book = null;
 
     public function getId(): ?int
